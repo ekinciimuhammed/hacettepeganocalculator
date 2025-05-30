@@ -1,0 +1,3 @@
+([('gano_calculator',
+   '/Users/muhammedekinci/Desktop/hacettepegano-main/dist/gano_calculator',
+   'EXECUTABLE')],)
