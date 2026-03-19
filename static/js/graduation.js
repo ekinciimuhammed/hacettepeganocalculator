@@ -859,6 +859,9 @@ function renderGraduationReport(report, container) {
     const withLabStatusLabel = er.withLabRuleKnown ? `${er.hasWithLab} / ${er.requiredWithLab}` : `${er.hasWithLab} / ?`;
     const withoutLabStatusLabel = er.withoutLabRuleKnown ? `${er.hasWithoutLab} / ${er.requiredWithoutLab}` : `${er.hasWithoutLab} / ?`;
 
+    const labRecs = (report.electiveRecommendations && report.electiveRecommendations.lab) ? report.electiveRecommendations.lab : [];
+    const isNoLabDept = (report.electiveRules.requiredWithLab === 0 || labRecs.length === 0);
+
     let electiveHtml = `
         <div class="grad-section">
             <h4 class="grad-section-title">
@@ -866,7 +869,7 @@ function renderGraduationReport(report, container) {
                 Seçmeli Ders Durumu
             </h4>
             <div class="grad-elective-cards">
-                <div class="grad-elective-card ${er.withLabOk ? 'grad-elective-ok' : 'grad-elective-missing'}">
+                <div class="grad-elective-card ${er.withLabOk ? 'grad-elective-ok' : 'grad-elective-missing'}" style="${isNoLabDept ? 'display:none;' : ''}">
                     <div class="grad-elective-icon">
                         <i class="fa-solid fa-microscope"></i>
                     </div>
@@ -886,9 +889,9 @@ function renderGraduationReport(report, container) {
                         <i class="fa-solid fa-book"></i>
                     </div>
                     <div class="grad-elective-info">
-                        <div class="grad-elective-label">Labsız Seçmeli</div>
+                        <div class="grad-elective-label">${isNoLabDept ? 'Seçmeli Dersler' : 'Labsız Seçmeli'}</div>
                         <div class="grad-elective-count">${withoutLabStatusLabel}</div>
-                        <div class="grad-elective-hint">Lab olmayan seçmeli dersler</div>
+                        <div class="grad-elective-hint">${isNoLabDept ? 'Müfredattaki seçmeli havuzu dersleri' : 'Lab olmayan seçmeli dersler'}</div>
                     </div>
                     <div class="grad-elective-status">
                         ${er.withoutLabOk
@@ -969,28 +972,46 @@ function renderGraduationReport(report, container) {
                 <i class="fa-solid fa-lightbulb" style="color:#f59e0b;"></i>
                 Seçmeli Ders Önerileri
             </h4>
-            <div style="display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
-                <button type="button" class="grad-rec-tab-btn active" data-rec-tab="lab" style="border:1px solid #8b5cf6; color:#6d28d9; background:#f5f3ff; border-radius:8px; padding:6px 10px; cursor:pointer; font-weight:600;">
+            <style>
+                .grad-rec-tab-btn {
+                    border-radius: 8px; 
+                    padding: 6px 12px; 
+                    cursor: pointer; 
+                    font-weight: 600; 
+                    transition: all 0.2s;
+                    font-size: 0.85rem;
+                }
+                .grad-rec-tab-btn:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+                .grad-rec-tab-btn.active { box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
+            </style>
+            <div style="display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap;">
+                <button type="button" class="grad-rec-tab-btn ${!isNoLabDept ? 'active' : ''}" 
+                        data-rec-tab="lab" 
+                        style="border:1px solid #8b5cf6; color:#6d28d9; background:#f5f3ff; ${isNoLabDept ? 'display:none;' : ''}">
                     Lablı (${(report.electiveRecommendations && report.electiveRecommendations.lab ? report.electiveRecommendations.lab.length : 0)})
                 </button>
-                <button type="button" class="grad-rec-tab-btn" data-rec-tab="nonlab" style="border:1px solid #3b82f6; color:#1d4ed8; background:#eff6ff; border-radius:8px; padding:6px 10px; cursor:pointer; font-weight:600;">
-                    Labsız (${(report.electiveRecommendations && report.electiveRecommendations.nonLab ? report.electiveRecommendations.nonLab.length : 0)})
+                <button type="button" class="grad-rec-tab-btn ${isNoLabDept ? 'active' : ''}" 
+                        data-rec-tab="nonlab" 
+                        style="border:1px solid #3b82f6; color:#1d4ed8; background:#eff6ff;">
+                    ${isNoLabDept ? 'Seçmeli' : 'Labsız'} (${(report.electiveRecommendations && report.electiveRecommendations.nonLab ? report.electiveRecommendations.nonLab.length : 0)})
                 </button>
-                <button type="button" class="grad-rec-tab-btn" data-rec-tab="lang" style="border:1px solid #10b981; color:#047857; background:#ecfdf5; border-radius:8px; padding:6px 10px; cursor:pointer; font-weight:600;">
-                    Dil Dersleri (${(report.electiveRecommendations && report.electiveRecommendations.language ? report.electiveRecommendations.language.length : 0)})
+                <button type="button" class="grad-rec-tab-btn" 
+                        data-rec-tab="lang" 
+                        style="border:1px solid #10b981; color:#047857; background:#ecfdf5;">
+                    ${isNoLabDept ? 'Seçmeli Dil Dersi' : 'Dil Dersleri'} (${(report.electiveRecommendations && report.electiveRecommendations.language ? report.electiveRecommendations.language.length : 0)})
                 </button>
             </div>
 
-            <div class="grad-rec-panel" data-rec-panel="lab" style="display:block;">
-                ${recommendationLabRows || '<div style="font-size:0.9rem; color:var(--text-muted); padding:6px 2px;">Lablı öneri bulunamadı (alınmamış uygun ders yok).</div>'}
+            <div class="grad-rec-panel" data-rec-panel="lab" style="display:${isNoLabDept ? 'none' : 'block'};">
+                ${recommendationLabRows || '<div style="font-size:0.9rem; color:var(--text-muted); padding:6px 2px;">Lablı öneri bulunamadı.</div>'}
             </div>
-            <div class="grad-rec-panel" data-rec-panel="nonlab" style="display:none;">
+            <div class="grad-rec-panel" data-rec-panel="nonlab" style="display:${isNoLabDept ? 'block' : 'none'};">
                 ${recommendationNonLabRows || '<div style="font-size:0.9rem; color:var(--text-muted); padding:6px 2px;">Labsız öneri bulunamadı (alınmamış uygun ders yok).</div>'}
             </div>
             <div class="grad-rec-panel" data-rec-panel="lang" style="display:none;">
                 ${recommendationLanguageRows || '<div style="font-size:0.9rem; color:var(--text-muted); padding:6px 2px;">Dil dersi önerisi bulunamadı (uygun/alınmamış ders yok).</div>'}
             </div>
-            <div style="margin-top:8px; font-size:0.82rem; color:var(--text-muted);">
+            <div style="margin-top:10px; font-size:0.82rem; color:var(--text-muted); line-height:1.4;">
                 Öneriler, bölüm müfredatındaki seçmeli havuzundan alınan ve henüz alınmamış derslere göre üretilir.
             </div>
         </div>
