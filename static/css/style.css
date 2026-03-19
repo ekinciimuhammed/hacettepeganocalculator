@@ -1,0 +1,1974 @@
+:root {
+    --bg-body: #f8fafc;
+    --bg-card: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+
+    --border-color: #e2e8f0;
+    --input-bg: #f1f5f9;
+    --input-border: #cbd5e1;
+
+    --primary-color: #3b82f6;
+    /* Blue 500 */
+    --primary-hover: #2563eb;
+    /* Blue 600 */
+    --primary-light: #eff6ff;
+
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+[data-theme="dark"] {
+    /* "Second Photo" Theme - Deep Midnight Navy */
+    --bg-body: #0b0f19;
+    /* Very deep navy, almost black */
+    --bg-card: #111827;
+    /* Dark grayish navy */
+
+    /* Text - Softer White to avoid harshness */
+    --text-primary: #e2e8f0;
+    /* Slate 200 - Soft White */
+    --text-secondary: #94a3b8;
+    /* Slate 400 */
+    --text-muted: #64748b;
+    /* Slate 500 */
+
+    --border-color: #1f2937;
+    /* Gray 800 */
+    --input-bg: #1f2937;
+    --input-border: #374151;
+
+    /* Accents - Retain the vibrant blue but maybe slightly adjusted */
+    --primary-color: #3b82f6;
+    --primary-hover: #60a5fa;
+    --primary-light: rgba(59, 130, 246, 0.1);
+
+    --success-color: #34d399;
+    --warning-color: #fbbf24;
+    --danger-color: #f87171;
+
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+}
+
+/* Dark Mode Component Overrides */
+[data-theme="dark"] .upload-zone {
+    background-color: #111827;
+    /* Dark navy */
+    border-color: #374151;
+    /* Gray 700 */
+}
+
+[data-theme="dark"] .upload-zone:hover {
+    background-color: #1f2937;
+    border-color: #3b82f6;
+}
+
+[data-theme="dark"] .cloud-icon {
+    background-color: #1f2937;
+    color: #3b82f6;
+    box-shadow: none;
+}
+
+[data-theme="dark"] .upload-content h3 {
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .upload-content p {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] #manual-entry-btn {
+    color: #cbd5e1;
+    border-color: #4b5563;
+}
+
+[data-theme="dark"] #manual-entry-btn:hover {
+    color: #f8fafc;
+    border-color: #cbd5e1;
+    background: #1f2937;
+}
+
+[data-theme="dark"] .app-header h1 {
+    color: #f1f5f9;
+}
+
+/* Dark Mode Table Overrides */
+[data-theme="dark"] .table-wrapper {
+    border-color: #1f2937;
+    background: #111827;
+    /* Dark grayish navy */
+}
+
+[data-theme="dark"] .course-table {
+    background: #111827;
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .course-table thead {
+    background: #0b0f19;
+    /* Darker header */
+    border-bottom: 1px solid #1f2937;
+}
+
+[data-theme="dark"] .course-table th {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .course-table td {
+    border-bottom: 1px solid #1f2937;
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .course-table tr:hover {
+    background-color: #1f2937;
+}
+
+[data-theme="dark"] .table-input {
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .table-input:hover {
+    background: #1f2937;
+}
+
+[data-theme="dark"] .table-input:focus {
+    background: #0b0f19;
+    border-color: #3b82f6;
+}
+
+[data-theme="dark"] .grade-select {
+    background-color: #1f2937;
+    color: #e2e8f0;
+    border-color: #374151;
+}
+
+[data-theme="dark"] .semester-header td {
+    background: #0f172a !important;
+    /* Specific override for semester headers */
+    border-color: #1f2937 !important;
+    color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .semester-header span {
+    color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .semester-header i {
+    color: #3b82f6 !important;
+}
+
+[data-theme="dark"] .tab-switcher {
+    background: #111827;
+    border: 1px solid #1f2937;
+}
+
+[data-theme="dark"] #theme-toggle-btn {
+    background: #1f2937 !important;
+    color: #e2e8f0;
+    border: 1px solid #374151;
+}
+
+[data-theme="dark"] #theme-toggle-btn:hover {
+    background: #374151 !important;
+    color: #f59e0b;
+    /* Sun color on hover */
+}
+
+/* Ensure manual entry button is not glaring white if it isn't already handled */
+[data-theme="dark"] #manual-entry-btn {
+    background-color: transparent;
+    color: #94a3b8;
+    border-color: #374151;
+}
+
+[data-theme="dark"] #manual-entry-btn:hover {
+    background-color: #1f2937;
+    color: #f8fafc;
+    border-color: #64748b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-container {
+    background-color: var(--bg-card);
+    width: 100%;
+    max-width: 1000px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Header */
+
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+}
+
+.brand-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.app-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--primary-color), #2563eb);
+    color: white;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+}
+
+.app-header h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: #1e293b;
+}
+
+/* Reset Button (Aesthetic) */
+.btn-reset {
+    background: white;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-reset:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    background: var(--primary-light);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+    transform: translateY(-2px);
+}
+
+.btn-reset i {
+    font-size: 0.9em;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Upload Zone */
+.upload-zone {
+    border: 2px dashed var(--border-color);
+    border-radius: var(--radius-lg);
+    background-color: #f8fafc;
+    padding: 4rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 2rem;
+}
+
+.upload-zone:hover,
+.upload-zone.dragover {
+    background-color: var(--primary-light);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.cloud-icon {
+    background-color: white;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    box-shadow: var(--shadow-sm);
+    color: var(--primary-color);
+    font-size: 1.75rem;
+}
+
+.upload-content h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #334155;
+}
+
+.upload-content p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* Progress Section */
+.progress-section {
+    margin-bottom: 3rem;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 12px;
+    background-color: #e2e8f0;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), #60a5fa);
+    border-radius: 6px;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* GNO Display */
+.gno-display {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.gno-display h2 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* Quick Upload Button (Floating near GNO) */
+/* Quick Upload Button (Floating near GNO) */
+.btn-quick-upload {
+    background-color: #eff6ff;
+    /* Light Blue */
+    border: none;
+    color: var(--primary-color);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+}
+
+.btn-quick-upload:hover {
+    background-color: #dbeafe;
+    color: var(--primary-hover);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+}
+
+.btn-quick-upload i {
+    font-size: 1.4rem;
+}
+
+.gno-value {
+    font-size: 5rem;
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, #1e293b, #475569);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.3s;
+}
+
+/* Actions */
+.actions-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.filter-group {
+    background: #f1f5f9;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+.btn-primary-solid {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary-solid:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-outline-primary {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    background: transparent;
+}
+
+.btn-outline-primary:hover {
+    background: var(--primary-light);
+}
+
+.btn-outline-secondary {
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+    background: white;
+}
+
+.btn-outline-secondary:hover {
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+}
+
+.secondary-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+/* Table */
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.01);
+}
+
+.course-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.course-table thead {
+    background: #f8fafc;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.course-table th {
+    text-align: left;
+    padding: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.course-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f1f5f9;
+    color: var(--text-primary);
+    vertical-align: middle;
+}
+
+.course-table tr:last-child td {
+    border-bottom: none;
+}
+
+.course-table tr:hover {
+    background-color: #f8fafc;
+}
+
+/* Inputs in Table */
+.table-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid transparent;
+    background: transparent;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    transition: all 0.2s;
+}
+
+.table-input:hover {
+    background: #f1f5f9;
+}
+
+.table-input:focus {
+    background: white;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--primary-light);
+    outline: none;
+}
+
+/* Grade Select */
+.grade-select {
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background-color: white;
+    font-weight: 500;
+    color: var(--text-primary);
+    cursor: pointer;
+    min-width: 70px;
+    outline: none;
+}
+
+.grade-select:focus {
+    border-color: var(--primary-color);
+}
+
+/* Delete Button */
+.btn-icon {
+    padding: 0.5rem;
+    color: var(--text-muted);
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.btn-icon:hover {
+    color: var(--danger-color);
+    background: #fef2f2;
+}
+
+/* Hidden Utility */
+.hidden {
+    display: none !important;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.course-row {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Status Colors for GNO */
+.text-success {
+    color: #10b981 !important;
+    background: linear-gradient(135deg, #10b981, #059669);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-warning {
+    color: #f59e0b !important;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-danger {
+    color: #ef4444 !important;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Footer Styles */
+.app-footer {
+    width: 100%;
+    margin-top: 40px;
+    padding: 30px 20px;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    text-align: center;
+}
+
+.footer-content p {
+    color: #64748b;
+    font-size: 0.85rem;
+    margin: 5px 0;
+}
+
+.footer-content a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.footer-content a:hover {
+    text-decoration: underline;
+}
+
+.footer-note {
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* Dark Mode Footer */
+body.dark-mode .app-footer {
+    background: #0f172a;
+    border-top-color: #1e293b;
+}
+
+body.dark-mode .footer-content p {
+    color: #94a3b8;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .main-container {
+        padding: 1.5rem;
+    }
+
+    .gno-value {
+        font-size: 3.5rem;
+    }
+
+    .mobile-hide {
+        display: none;
+    }
+}
+
+/* Simulation Mode */
+.simulation-active .table-input,
+.simulation-active .grade-select {
+    border-color: var(--primary-color);
+    background-color: #f0f9ff;
+}
+
+.simulation-active .table-input:focus,
+.simulation-active .grade-select:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Change button to Warning color when active (Reset state) */
+.simulation-active #simulation-btn {
+    background-color: var(--warning-color);
+    color: white;
+    border-color: var(--warning-color);
+}
+
+.simulation-active #simulation-btn:hover {
+    background-color: #d97706;
+}
+
+.simulation-active #simulation-btn i {
+    transform: rotate(180deg);
+    transition: transform 0.3s;
+}
+
+/* Print Styles */
+@media print {
+    @page {
+        margin: 1cm;
+        size: A4;
+    }
+
+    body {
+        background-color: white;
+        padding: 0;
+        color: black;
+    }
+
+    .main-container {
+        box-shadow: none;
+        max-width: 100%;
+        padding: 0;
+        border: none;
+    }
+
+    /* Hide non-printable elements */
+    .app-header,
+    .upload-zone,
+    .actions-toolbar,
+    .secondary-actions,
+    .btn-icon,
+    #reset-app-btn,
+    .target-simulation-section,
+    .progress-section {
+        display: none !important;
+    }
+
+    /* Make simulation section visible if it was open? 
+       Actually user might want to print the result. 
+       Let's keep simulation result visible if it has content, but hide the inputs.
+    */
+    /* Custom Override: If we want to print the simulation plan */
+    /* For now, just print the table and GNO. */
+
+    .gno-display {
+        margin-bottom: 20px;
+        page-break-after: avoid;
+    }
+
+    .gno-value {
+        font-size: 3rem;
+        -webkit-text-fill-color: black;
+        background: none;
+        color: black;
+    }
+
+    /* Table Styling for Print */
+    .table-wrapper {
+        border: 1px solid #000;
+        box-shadow: none;
+    }
+
+    .course-table th {
+        color: black;
+        border-bottom: 2px solid black;
+        background: #eee !important;
+    }
+
+    .course-table td {
+        border-bottom: 1px solid #ccc;
+        color: black;
+    }
+
+    /* Inputs as Text */
+    .table-input,
+    .grade-select {
+        border: none;
+        background: transparent !important;
+        padding: 0;
+        width: auto;
+        color: black;
+        font-weight: 500;
+        -webkit-appearance: none;
+        appearance: none;
+    }
+
+    /* Hide specific columns if needed? No, user wants data. 
+       Maybe hide the 'Delete/Actions' column (last child)
+    */
+    .course-table th:last-child,
+    .course-table td:last-child {
+        display: none;
+    }
+
+    /* Sim Checkbox Column */
+    .course-table th:first-child,
+    .course-table td:first-child {
+        display: none;
+    }
+
+    /* Ensure table fits */
+    .course-table {
+        font-size: 11px;
+    }
+
+    .grade-scale-print-container {
+        display: block;
+        margin-top: 2rem;
+        border-top: 1px solid #ddd;
+        padding-top: 1rem;
+        page-break-inside: avoid;
+    }
+
+    .grade-scale-print-container h3 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        color: #333;
+    }
+
+    .grade-scale-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        color: #555;
+    }
+
+    .grade-scale-item {
+        background: #f9f9f9;
+        padding: 4px 8px;
+        border-radius: 4px;
+        border: 1px solid #eee;
+        text-align: center;
+    }
+}
+
+/* Tab Switcher & Views */
+.tab-switcher {
+    display: flex;
+    background: #f1f5f9;
+    padding: 5px;
+    border-radius: 9999px;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.tab-btn {
+    border: none;
+    background: transparent;
+    padding: 8px 20px;
+    border-radius: 9999px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tab-btn:hover {
+    color: #334155;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.tab-btn.active {
+    background: #0ea5e9;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(14, 165, 233, 0.2);
+}
+
+.app-view {
+    display: none;
+    width: 100%;
+}
+
+.app-view.active {
+    display: block;
+    animation: fadeInView 0.3s ease;
+}
+
+@keyframes fadeInView {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Footer Styles */
+.app-footer a:hover {
+    color: var(--primary-color) !important;
+}
+
+.contributors-container:hover .contributors-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.contributors-dropdown {
+    position: absolute;
+    bottom: 140%;
+    right: 0;
+    min-width: 200px;
+    background: white;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 100;
+}
+
+/* Little arrow for the popup */
+.contributors-dropdown::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    right: 30px;
+    width: 12px;
+    height: 12px;
+    background: white;
+    transform: rotate(45deg);
+    border-bottom: 1px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0;
+}
+
+.contributor-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #475569 !important;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.contributor-link:hover {
+    background: #f1f5f9;
+    color: #0077b5 !important;
+    /* LinkedIn Blue */
+}
+
+.contributor-link i {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    transition: color 0.2s;
+}
+
+.contributor-link:hover i {
+    color: #0077b5;
+}
+
+/* Dark Mode Footer */
+[data-theme="dark"] .app-footer {
+    border-color: #1f2937 !important;
+    color: #94a3b1 !important;
+}
+
+[data-theme="dark"] .app-footer a {
+    color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .app-footer a:hover {
+    color: #60a5fa !important;
+}
+
+[data-theme="dark"] .contributors-dropdown {
+    background: #1f2937;
+    border-color: #374151;
+}
+
+[data-theme="dark"] .contributors-dropdown::after {
+    background: #1f2937;
+    border-color: #374151;
+}
+
+[data-theme="dark"] .contributor-link {
+    color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .contributor-link:hover {
+    background: #374151;
+    color: #60a5fa !important;
+}
+
+[data-theme="dark"] .made-with span {
+    color: #e2e8f0 !important;
+    border-color: #475569 !important;
+}
+
+/* Footer Styles */
+.app-footer-bar {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.github-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.github-link:hover {
+    color: #181717;
+    /* GitHub color */
+}
+
+/* Dark mode GitHub hover */
+[data-theme="dark"] .github-link:hover {
+    color: white;
+}
+
+.contributors {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.heart-icon-container {
+    position: relative;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+.heart-icon-container:hover {
+    transform: scale(1.1);
+}
+
+/* Tooltip/Popover */
+.contributors-tooltip {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: 140%;
+    /* Show above */
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+    min-width: 160px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+}
+
+/* Arrow */
+.contributors-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -6px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+}
+
+[data-theme="dark"] .contributors-tooltip {
+    background: #1f2937;
+    border-color: #374151;
+}
+
+[data-theme="dark"] .contributors-tooltip::after {
+    border-color: #1f2937 transparent transparent transparent;
+}
+
+.heart-icon-container:hover .contributors-tooltip,
+.heart-icon-container:focus-within .contributors-tooltip {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.contributors-tooltip a {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+    display: block;
+    text-align: center;
+}
+
+.contributors-tooltip a:hover {
+    background: #f1f5f9;
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .contributors-tooltip a:hover {
+    background: #374151;
+}
+
+/* ========== Graduation Check Styles ========== */
+.grad-view-content {
+    padding: 20px 0;
+}
+
+.grad-dept-selector {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    box-shadow: var(--shadow-sm);
+}
+
+.grad-dept-selector label {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.grad-dept-select {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px 14px;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    background: var(--input-bg);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.grad-dept-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-light);
+    outline: none;
+}
+
+.grad-check-btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+}
+
+.grad-check-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.35);
+}
+
+.grad-check-btn:active {
+    transform: translateY(0);
+}
+
+/* Overall badge */
+.info-header {
+    background: var(--primary-color);
+    color: white;
+    padding: 12px 16px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between; /* To push close button to right */
+}
+
+.info-close-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.8rem;
+}
+
+.info-close-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+}
+
+.info-card.hidden {
+    display: none;
+}
+.grad-overall {
+    padding: 16px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.grad-success {
+    background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+.grad-warning {
+    background: linear-gradient(135deg, #fefce8, #fef3c7);
+    color: #92400e;
+    border: 1px solid #fde68a;
+}
+
+/* Summary Cards */
+.grad-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.grad-summary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s;
+}
+
+.grad-summary-card:hover {
+    transform: translateY(-2px);
+}
+
+.grad-summary-number {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.grad-summary-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+/* Progress bar */
+.grad-progress-section {
+    margin-bottom: 20px;
+    padding: 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+}
+
+.grad-progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.grad-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981, #34d399);
+    border-radius: 5px;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Sections */
+.grad-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-sm);
+}
+
+.grad-section-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 15px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.grad-count-badge {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.grad-count-danger {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.grad-count-warning {
+    background: #fffbeb;
+    color: #d97706;
+}
+
+/* Semester Groups */
+.grad-semester-group {
+    margin-bottom: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.grad-semester-header {
+    padding: 10px 14px;
+    background: #f8fafc;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.grad-semester-count {
+    margin-left: auto;
+    font-size: 0.8rem;
+    color: #ef4444;
+    font-weight: 500;
+}
+
+/* Course Rows */
+.grad-course-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.9rem;
+    transition: background 0.15s;
+}
+
+.grad-course-row:last-child {
+    border-bottom: none;
+}
+
+.grad-course-row:hover {
+    background: #f8fafc;
+}
+
+.grad-code {
+    font-weight: 700;
+    color: var(--primary-color);
+    min-width: 80px;
+    font-family: 'SF Mono', 'Menlo', monospace;
+    font-size: 0.85rem;
+}
+
+.grad-name {
+    flex: 1;
+    color: var(--text-primary);
+}
+
+.grad-akts {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.grad-grade {
+    font-weight: 600;
+    color: var(--text-secondary);
+    min-width: 30px;
+    text-align: center;
+}
+
+.grad-status-badge {
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.grad-badge-missing {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.grad-badge-failed {
+    background: #fffbeb;
+    color: #d97706;
+}
+
+.grad-missing-row {
+    background: #fefce8;
+}
+
+.grad-failed-row {
+    background: #fff7ed;
+}
+
+/* Elective Cards */
+.grad-elective-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.grad-elective-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    transition: all 0.2s;
+}
+
+.grad-elective-ok {
+    background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+    border-color: #bbf7d0;
+}
+
+.grad-elective-missing {
+    background: linear-gradient(135deg, #fef2f2, #fff1f2);
+    border-color: #fecaca;
+}
+
+.grad-elective-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    background: rgba(139, 92, 246, 0.1);
+    color: #8b5cf6;
+}
+
+.grad-elective-info {
+    flex: 1;
+}
+
+.grad-elective-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.grad-elective-count {
+    margin-top: 2px;
+}
+
+.grad-elective-current {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.grad-elective-sep {
+    color: var(--text-muted);
+    margin: 0 2px;
+}
+
+.grad-elective-required {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.grad-elective-hint {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+/* Lab Pairs */
+.grad-detected-pairs,
+.grad-detected-standalone {
+    margin-top: 8px;
+}
+
+.grad-pair-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: #f8fafc;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+    flex-wrap: wrap;
+}
+
+.grad-pair-theory {
+    color: #334155;
+    font-weight: 500;
+}
+
+.grad-pair-arrow {
+    color: #8b5cf6;
+    font-size: 0.8rem;
+}
+
+.grad-pair-lab {
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* Dark Mode */
+[data-theme="dark"] .grad-dept-selector {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .grad-success {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+    color: #34d399;
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+[data-theme="dark"] .grad-warning {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
+    color: #fbbf24;
+    border-color: rgba(245, 158, 11, 0.3);
+}
+
+[data-theme="dark"] .grad-semester-header {
+    background: #0f172a;
+}
+
+[data-theme="dark"] .grad-course-row:hover {
+    background: #1f2937;
+}
+
+[data-theme="dark"] .grad-missing-row {
+    background: rgba(250, 204, 21, 0.05);
+}
+
+[data-theme="dark"] .grad-failed-row {
+    background: rgba(249, 115, 22, 0.05);
+}
+
+[data-theme="dark"] .grad-pair-row {
+    background: #1f2937;
+}
+
+[data-theme="dark"] .grad-elective-ok {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.04));
+    border-color: rgba(16, 185, 129, 0.2);
+}
+
+[data-theme="dark"] .grad-elective-missing {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(239, 68, 68, 0.04));
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+[data-theme="dark"] .grad-count-danger {
+    background: rgba(239, 68, 68, 0.15);
+}
+
+[data-theme="dark"] .grad-count-warning {
+    background: rgba(245, 158, 11, 0.15);
+}
+
+[data-theme="dark"] .grad-badge-missing {
+    background: rgba(239, 68, 68, 0.15);
+}
+
+[data-theme="dark"] .grad-badge-failed {
+    background: rgba(245, 158, 11, 0.15);
+}
+
+[data-theme="dark"] .grad-progress-bar {
+    background: #374151;
+}
+
+/* ========== UI Reorganization Styles ========== */
+
+.gpa-settings-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    padding: 0.4rem 1rem;
+    background: rgba(241, 245, 249, 0.6);
+    border-radius: 9999px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    backdrop-filter: blur(4px);
+}
+
+[data-theme="dark"] .gpa-settings-bar {
+    background: rgba(31, 41, 55, 0.6);
+    border-color: rgba(55, 65, 81, 0.8);
+}
+
+.toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.btn-future {
+    border: 1px solid #8b5cf6 !important;
+    color: #8b5cf6 !important;
+    background: white !important;
+}
+
+[data-theme="dark"] .btn-future {
+    background: transparent !important;
+}
+
+.btn-future:hover {
+    background: rgba(139, 92, 246, 0.05) !important;
+    border-color: #7c3aed !important;
+    color: #7c3aed !important;
+}
+
+.btn-share {
+    background-color: #0ea5e9 !important;
+    border: none !important;
+    color: white !important;
+}
+
+.btn-share:hover {
+    background-color: #0284c7 !important;
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3) !important;
+    transform: translateY(-1px);
+}
+
+/* Premium Dropdown Menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 0.5rem;
+    background-color: var(--bg-card);
+    min-width: 180px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    z-index: 1000;
+    padding: 0.5rem 0;
+    overflow: hidden;
+    animation: slideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content button {
+    width: 100%;
+    padding: 0.7rem 1.2rem;
+    border: none;
+    background: none;
+    text-align: left;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.dropdown-content button i {
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+.dropdown-content button:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+}
+
+.dropdown-content button:hover i {
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .dropdown-content button:hover {
+    background-color: #1e293b;
+    color: #60a5fa;
+}
+
+[data-theme="dark"] .dropdown-content button:hover i {
+    color: #60a5fa;
+}
+
+/* Adjustments for the new toolbar */
+.actions-toolbar {
+    padding-top: 0.5rem;
+    padding-bottom: 2rem;
+    border-bottom: none; /* Removed the line to make it cleaner */
+}
+
+/* ========== Page Layout & Info Sidebar ========== */
+
+.page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    flex: 1; /* Pushes footer down */
+}
+
+.main-container {
+    flex: 1;
+    max-width: 1000px;
+    margin: 0 !important; /* Overriding previous centering for flex layout */
+}
+
+.info-sidebar {
+    width: 340px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 2rem;
+    transition: all 0.3s ease;
+}
+
+.info-sidebar.hidden {
+    display: none;
+}
+
+.info-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.info-header {
+    background: linear-gradient(135deg, var(--primary-color), #2563eb);
+    color: white;
+    padding: 1.25rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+}
+
+.info-body {
+    padding: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+.info-body p {
+    margin-bottom: 1rem;
+}
+
+.info-body p:last-child {
+    margin-bottom: 0;
+}
+
+.info-body a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1.5px solid var(--primary-light);
+    transition: all 0.2s;
+}
+
+.info-body a:hover {
+    color: var(--primary-hover);
+    border-bottom-color: var(--primary-hover);
+}
+
+.disclaimer {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--warning-color);
+}
+
+[data-theme="dark"] .disclaimer {
+    background: #1f2937;
+    color: #94a3b8;
+}
+
+/* Final Footer Styling (Minimized) */
+.app-footer {
+    width: 100%;
+    text-align: center;
+    padding: 3rem 1.5rem 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.app-footer p {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.5;
+    opacity: 0.65;
+}
+
+.app-footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.app-footer a:hover {
+    text-decoration: underline;
+}
+
+[data-theme="dark"] .app-footer {
+    border-top-color: #1e293b;
+}
+
+/* Responsive Sidebar */
+@media (max-width: 1280px) {
+    .page-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .main-container {
+        width: 100%;
+    }
+
+    .info-sidebar {
+        width: 100%;
+        max-width: 1000px;
+        position: static;
+    }
+}
+
+@media (max-width: 640px) {
+    .page-wrapper {
+        padding: 1rem;
+        gap: 1.5rem;
+    }
+    
+    .info-header {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+    
+    .info-body {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+}
