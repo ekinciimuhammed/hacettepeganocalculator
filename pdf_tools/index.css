@@ -1,0 +1,136 @@
+:root {
+  --bg: #eff3f8;
+  --panel: #f9fbff;
+  --border: #d7e1ef;
+  --text: #22314c;
+  --muted: #6f829f;
+  --chip-bg: #eef4fd;
+  --chip-border: #cddcf3;
+  --chip-text: #2f5a93;
+  --chip-hover: #e2edff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  background: linear-gradient(180deg, #f2f5fa 0%, #eaf0f7 100%);
+  color: var(--text);
+}
+
+.page {
+  min-height: 100vh;
+  padding: 28px 16px;
+}
+
+.tools-card {
+  max-width: 1180px;
+  margin: 0 auto;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(36, 67, 110, 0.08);
+}
+
+.tools-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.tools-header h1 {
+  margin: 0;
+  font-size: 1.9rem;
+}
+
+.tools-header input {
+  width: min(340px, 100%);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #f2f7ff;
+  color: var(--text);
+  padding: 11px 12px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.tools-header input:focus {
+  border-color: #9db7df;
+}
+
+.tools-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.tools-col {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fcfeff;
+  padding: 14px;
+}
+
+.tools-col h2 {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 1.06rem;
+  letter-spacing: 0.01em;
+}
+
+.tools-col ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tools-col li {
+  margin: 0;
+}
+
+.tools-col a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 11px;
+  border: 1px solid var(--chip-border);
+  border-radius: 999px;
+  background: var(--chip-bg);
+  color: var(--chip-text);
+  font-size: 0.92rem;
+  transition: background 0.15s ease;
+}
+
+.tools-col a:hover {
+  background: var(--chip-hover);
+}
+
+@media (max-width: 900px) {
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .page {
+    padding: 12px;
+  }
+
+  .tools-card {
+    border-radius: 14px;
+    padding: 14px;
+  }
+
+  .tools-header h1 {
+    font-size: 1.5rem;
+  }
+}
