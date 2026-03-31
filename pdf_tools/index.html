@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NebulaPDF tools" />
+  <title>NebulaPDF Tools</title>
+  <link rel="icon" href="./favicon.ico" sizes="32x32" />
+  <link rel="icon" type="image/png" sizes="512x512" href="./favicon-512.png" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+  <link rel="manifest" href="./site.webmanifest" />
+  <link rel="stylesheet" href="./index.css" />
+</head>
+<body>
+  <main class="page">
+    <section class="tools-card" id="tools">
+      <header class="tools-header">
+        <h1>Tools</h1>
+        <input type="text" id="tool-search" placeholder="Tool ara..." aria-label="Tool ara" />
+      </header>
+
+      <div class="tools-grid">
+        <article class="tools-col">
+          <h2>PDF to</h2>
+          <ul>
+            <li><a href="./tools/pdf-to-png.html">PDF to PNG</a></li>
+            <li><a href="./tools/pdf-to-jpeg.html">PDF to JPEG</a></li>
+            <li><a href="./tools/pdf-to-txt.html">PDF to TXT</a></li>
+          </ul>
+        </article>
+
+        <article class="tools-col">
+          <h2>To PDF</h2>
+          <ul>
+            <li><a href="./tools/png-to-pdf.html">PNG to PDF</a></li>
+            <li><a href="./tools/jpeg-to-pdf.html">JPEG to PDF</a></li>
+            <li><a href="./tools/txt-to-pdf.html">TXT to PDF</a></li>
+            <li><a href="./tools/html-to-pdf.html">HTML to PDF</a></li>
+            <li><a href="./tools/markdown-to-pdf.html">Markdown to PDF</a></li>
+            <li><a href="./tools/epub-to-pdf.html">EPUB to PDF</a></li>
+            <li><a href="./tools/markdown-text-to-pdf.html">MD-Text to PDF</a></li>
+            <li><a href="./tools/word-to-pdf.html">Word to PDF</a></li>
+            <li><a href="./tools/rtf-to-pdf.html">RTF to PDF</a></li>
+            <li><a href="./tools/ppt-to-pdf.html">PPT to PDF</a></li>
+            <li><a href="./tools/excel-to-pdf.html">Excel to PDF</a></li>
+            <li><a href="./tools/heif-to-pdf.html">HEIF to PDF</a></li>
+            <li><a href="./tools/webp-to-pdf.html">WEBP to PDF</a></li>
+            <li><a href="./tools/svg-to-pdf.html">SVG to PDF</a></li>
+          </ul>
+        </article>
+
+        <article class="tools-col">
+          <h2>Basic PDF Edit</h2>
+          <ul>
+            <li><a href="./tools/merge-pdf.html">Merge PDF</a></li>
+            <li><a href="./tools/split-pdf.html">Split PDF</a></li>
+            <li><a href="./tools/extract-pages.html">Extract Pages</a></li>
+            <li><a href="./tools/remove-pages.html">Remove Pages</a></li>
+            <li><a href="./tools/rotate-pdf.html">Rotate PDF</a></li>
+            <li><a href="./tools/compress-pdf.html">Compress PDF</a></li>
+            <li><a href="./tools/remove-password.html">Remove Password</a></li>
+            <li><a href="./tools/remove-metadata.html">Remove Metadata</a></li>
+            <li><a href="./tools/compress-image.html">Compress Image</a></li>
+            <li><a href="./tools/image-resizer.html">Image Resizer</a></li>
+          </ul>
+        </article>
+
+        <article class="tools-col">
+          <h2>Advanced PDF Edit</h2>
+          <ul>
+            <li><a href="./tools/add-password.html">Encrypt / Add Password</a></li>
+            <li><a href="./tools/flatten-pdf.html">Flatten PDF</a></li>
+            <li><a href="./tools/compare-pdfs.html">Compare PDFs</a></li>
+            <li><a href="./tools/add-watermark.html">Add Watermark</a></li>
+            <li><a href="./tools/sort-pages.html">Sort Pages</a></li>
+            <li><a href="./tools/edit-metadata.html">Edit Metadata</a></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const input = document.getElementById('tool-search');
+    const items = Array.from(document.querySelectorAll('.tools-col li'));
+
+    input.addEventListener('input', function () {
+      const q = input.value.trim().toLowerCase();
+      items.forEach((li) => {
+        const visible = li.textContent.toLowerCase().includes(q);
+        li.style.display = visible ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GANO HESAPLAYICI | Pro</title>
+    <link rel="stylesheet" href="static/css/style.css?v=4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.5.0/lz-string.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+    </script>
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <main class="main-container">
+
+            <!-- Header with Tab Switcher -->
+            <header class="app-header" style="flex-direction: column; gap: 15px; padding-bottom: 0;">
+                <div style="display:flex; justify-content:space-between; width:100%; align-items:center;">
+                    <div class="brand-container" style="flex-direction: column; align-items: flex-start; gap: 2px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <img src="logo.jpeg" alt="Logo"
+                                style="width: 48px; height: 48px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                            <h1>GANO Hesaplayıcı</h1>
+                        </div>
+                        <span
+                            onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSe274vfOG-6z6b4rKTWVT8wVNaj_urjUceCdqKlcxdKOoNKbA/viewform', '_blank')"
+                            style="font-size: 0.75rem; color: #94a3b8; cursor: pointer; margin-left: 2px; transition: color 0.2s;"
+                            onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'">
+                            aramıza katılmak ister misin?
+                        </span>
+                    </div>
+
+                    <button id="reset-app-btn" class="btn-reset hidden" title="Yeni bir dosya yükle">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Yeni Dosya</span>
+                    </button>
+
+                    <button id="theme-toggle-btn" class="btn-icon"
+                        style="border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center; margin-left:10px;">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+
+                <!-- Tab Switcher -->
+                <div class="tab-switcher" id="main-tabs">
+                    <button class="tab-btn active" data-tab="view-calculator">
+                        <i class="fa-solid fa-calculator"></i> Hesaplayıcı
+                    </button>
+                    <button class="tab-btn" data-tab="view-analytics">
+                        <i class="fa-solid fa-chart-pie"></i> Analiz & Grafikler
+                    </button>
+                    <button class="tab-btn" data-tab="view-graduation">
+                        <i class="fa-solid fa-graduation-cap"></i> Mezuniyet
+                    </button>
+                    <button class="tab-btn" data-tab="view-useful-tools">
+                        <i class="fa-solid fa-toolbox"></i> İşe Yarar Toollar
+                    </button>
+                </div>
+            </header>
+
+            <!-- VIEW: Calculator -->
+            <div id="view-calculator" class="app-view active">
+                <!-- Upload Zone -->
+                <div class="upload-zone" id="drop-zone">
+                    <div class="upload-content">
+                        <div class="cloud-icon">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                        </div>
+                        <h3>PDF Transkriptini Buraya Bırak</h3>
+                        <p>Maksimum dosya boyutu 10MB (PDF)</p>
+                        <input type="file" id="file-input" accept=".pdf" hidden>
+                    </div>
+
+                    <div class="manual-entry-option" style="margin-top: 20px; text-align: center;">
+                        <span style="color: #94a3b8; font-size: 0.9rem;">veya</span>
+                        <br>
+                        <button class="btn btn-outline-secondary" id="manual-entry-btn" style="margin-top: 10px;">
+                            <i class="fa-solid fa-pen-to-square"></i> Manuel Giriş Yap
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Dashboard (Hidden initially) -->
+                <div id="dashboard" class="dashboard-container hidden">
+
+                    <!-- Graduation Progress -->
+                    <div class="progress-section">
+                        <div class="progress-header">
+                            <span>Mezuniyet İlerlemesi</span>
+                            <span id="current-akts">0 / 240 AKTS</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="progress-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <!-- Big GNO Display -->
+                    <div class="gno-display">
+                        <h2>Genel Not Ortalaması</h2>
+                        <div class="gno-value" id="gpa-value">0.00</div>
+
+                        <!-- GNO Settings Bar -->
+                        <div class="gpa-settings-bar">
+                            <div class="mode-toggle-group">
+                                <button id="mode-akts-btn" class="btn-mode active"
+                                    onclick="setMode('AKTS')">AKTS</button>
+                                <button id="mode-uk-btn" class="btn-mode" onclick="setMode('UK')">UK</button>
+                            </div>
+                            <div class="filter-group" title="Hesaplamaya dahil edilmeyen dersler">
+                                <i class="fa-regular fa-eye-slash"></i>
+                                <span>Silinenler hariç</span>
+                            </div>
+                        </div>
+
+                        <!-- Quick Upload Button -->
+                        <button id="quick-upload-btn" class="btn-quick-upload" title="Yeni PDF Yükle">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                        </button>
+                    </div>
+
+                    <!-- Smart Target Simulation -->
+                    <div id="target-simulation-section" class="target-simulation-section"
+                        style="display:none; margin-top: 20px; padding: 20px; background: #fff; border-radius: 12px; border: 1px solid #e2e8f0; flex-direction:column; gap:15px;">
+                        <h3 style="margin:0; font-size:1.1rem; color:#334155;"><i class="fa-solid fa-crosshairs"></i>
+                            Hedef GNO
+                            Simülasyonu</h3>
+                        <div style="display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap;">
+                            <div style="flex:1; min-width:150px;">
+                                <label style="font-size:0.85rem; color:#64748b; display:block; margin-bottom:5px;">Hedef
+                                    GNO</label>
+                                <input type="number" id="target-gno-input" class="form-control" placeholder="Örn: 3.00"
+                                    step="0.01" min="0" max="4.00"
+                                    style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px;">
+                            </div>
+                            <div style="flex:1; min-width:150px;">
+                                <label
+                                    style="font-size:0.85rem; color:#64748b; display:block; margin-bottom:5px;">Varsayılan
+                                    Tekrar Notu</label>
+                                <select id="target-grade-select" class="form-control"
+                                    style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px;">
+                                    <option value="4.00">A1 / AA (4.00)</option>
+                                    <option value="3.50">A3 / BA (3.50)</option>
+                                    <option value="3.00">B2 / BB (3.00)</option>
+                                    <option value="2.50">C1 / CB (2.50)</option>
+                                    <option value="2.00">C3 / CC (2.00)</option>
+                                </select>
+                            </div>
+                            <div style="display:flex; align-items:center; margin-bottom:10px;">
+                                <input type="checkbox" id="realistic-mode-check"
+                                    style="width:18px; height:18px; cursor:pointer;">
+                                <label for="realistic-mode-check"
+                                    style="margin-left:8px; font-size:0.9rem; color:#334155; cursor:pointer; user-select:none;">Gerçekçi
+                                    Senaryo</label>
+                                <i class="fa-solid fa-circle-info"
+                                    title="Çok düşük notlu dersleri en fazla B2 (3.00), orta notluları B1 (3.25) seviyesine çeker."
+                                    style="margin-left:5px; color:#94a3b8; font-size:0.9rem; cursor:help;"></i>
+                            </div>
+                            <button id="calc-target-btn" class="btn btn-primary-solid" style="height:38px;">
+                                Hesapla
+                            </button>
+                        </div>
+                        <div id="target-result-area"
+                            style="display:none; background:#f0f9ff; padding:15px; border-radius:8px; margin-top:10px; font-size: 0.95rem; color: #334155; line-height: 1.5;">
+                            <!-- Results will be injected here -->
+                        </div>
+                    </div>
+
+                    <!-- Future Planner Section (Hidden by default) -->
+                    <div id="future-planner-section" class="future-planner-section"
+                        style="display:none; margin-top: 20px; padding: 20px; background: #fff; border-radius: 12px; border: 1px solid #e2e8f0; flex-direction:column; gap:15px; border-left: 5px solid #8b5cf6;">
+                        <h3 style="margin:0; font-size:1.1rem; color:#334155;"><i class="fa-solid fa-crystal-ball"></i>
+                            Gelecek
+                            Dönem Planlayıcı</h3>
+
+                        <div style="display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap;">
+                            <div style="flex:1; min-width:150px;">
+                                <label
+                                    style="font-size:0.85rem; color:#64748b; display:block; margin-bottom:5px;">Planlanan
+                                    Kredi (AKTS/UK)</label>
+                                <input type="number" id="future-credits-input" class="form-control" value="30" min="1"
+                                    max="60"
+                                    style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px;">
+                            </div>
+                            <div style="flex:1; min-width:150px;">
+                                <label style="font-size:0.85rem; color:#64748b; display:block; margin-bottom:5px;">Hedef
+                                    Genel
+                                    Ort. (GNO)</label>
+                                <input type="number" id="future-target-gno" class="form-control" placeholder="Örn: 3.50"
+                                    step="0.01" min="0" max="4.00"
+                                    style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px;">
+                            </div>
+                            <button id="calc-future-btn" class="btn"
+                                style="height:38px; background-color:#8b5cf6; color:white;">
+                                <i class="fa-solid fa-calculator"></i> Hesapla
+                            </button>
+                        </div>
+
+                        <div id="future-result-area"
+                            style="display:none; background:#f5f3ff; padding:15px; border-radius:8px; margin-top:10px; font-size: 0.95rem; color: #4c1d95; line-height: 1.5;">
+                            <!-- Results injected here -->
+                        </div>
+                    </div>
+
+                    <!-- Actions Toolbar -->
+                    <div class="actions-toolbar">
+                        <div class="toolbar-group">
+                            <button class="btn btn-outline-primary" id="toggle-sim-btn">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> Simülasyon
+                            </button>
+                            <button class="btn btn-future" id="toggle-future-btn">
+                                <i class="fa-solid fa-crystal-ball"></i> Planlayıcı
+                            </button>
+                        </div>
+
+                        <div style="flex-grow: 1;"></div>
+
+                        <!-- Export & Share Actions -->
+                        <div class="toolbar-group">
+                            <button class="btn btn-share" onclick="generateShareLink()">
+                                <i class="fa-solid fa-share-nodes"></i> Paylaş
+                            </button>
+                            <button class="btn btn-outline-secondary" onclick="window.print()">
+                                <i class="fa-solid fa-print"></i> PDF
+                            </button>
+
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary dropdown-btn">
+                                    <i class="fa-solid fa-download"></i> İndir <i class="fa-solid fa-chevron-down"
+                                        style="font-size:0.7rem; opacity:0.7;"></i>
+                                </button>
+                                <div class="dropdown-content">
+                                    <button onclick="exportData('json')"><i class="fa-solid fa-code"></i> JSON
+                                        Aktar</button>
+                                    <button onclick="exportData('csv')"><i class="fa-solid fa-table"></i> CSV
+                                        Aktar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="secondary-actions">
+                        <button class="btn btn-primary-solid" id="add-course-btn">
+                            <i class="fa-solid fa-plus"></i> Yeni Ders
+                        </button>
+                        <button class="btn btn-outline-secondary" id="edit-grade-scale-btn" onclick="openGradeScaleEditor()">
+                            <i class="fa-solid fa-sliders"></i> Not Ölçeği
+                        </button>
+                    </div>
+
+                    <!-- Course Table -->
+                    <div class="table-wrapper">
+                        <table class="course-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%; text-align:center;" title="Simülasyona Dahil Et"><i
+                                            class="fa-solid fa-check-double"></i></th>
+                                    <th style="width: 15%;">Ders Kodu</th>
+                                    <th style="width: 35%;">Ders Adı</th>
+                                    <th style="width: 10%;" id="dynamic-credit-header">AKTS</th>
+                                    <th style="width: 15%;">Harf Notu</th>
+                                    <th style="width: 10%; text-align: center;">İşlem</th>
+                                </tr>
+                            </thead>
+                            <tbody id="courses-body">
+                                <!-- JS renders rows here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <!-- Hidden Grade Scale for Print -->
+                <div id="grade-scale-print" class="grade-scale-print-container">
+                    <h3>Not Ölçeği</h3>
+                    <div id="grade-scale-grid" class="grade-scale-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+            <!-- End of VIEW: Calculator -->
+
+            <!-- VIEW: Analytics -->
+            <div id="view-analytics" class="app-view" style="display:none; padding: 20px;">
+                <div class="analytics-container" style="display:flex; flex-wrap:wrap; gap:20px;">
+                    <div
+                        style="flex:1; min-width:300px; background:#fff; padding:20px; border-radius:12px; border:1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+                        <h4 style="text-align:center; margin-bottom:15px; color:#334155; font-size: 1.1rem;"><i
+                                class="fa-solid fa-chart-pie" style="color:#ec4899; margin-right:5px;"></i> Not Dağılımı
+                        </h4>
+                        <canvas id="grade-distribution-chart"></canvas>
+                    </div>
+                    <div
+                        style="flex:1; min-width:300px; background:#fff; padding:20px; border-radius:12px; border:1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+                        <h4 style="text-align:center; margin-bottom:15px; color:#334155; font-size: 1.1rem;"><i
+                                class="fa-solid fa-chart-line" style="color:#3b82f6; margin-right:5px;"></i> Dönem Bazlı
+                            Başarı</h4>
+                        <canvas id="gpa-trend-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: Graduation Check -->
+            <div id="view-graduation" class="app-view" style="display:none; padding: 20px;">
+                <div class="grad-view-content">
+                    <div class="grad-dept-selector">
+                        <label>
+                            <i class="fa-solid fa-building-columns"></i>
+                            Fakülte
+                        </label>
+                        <select id="faculty-select" class="grad-dept-select">
+                            <option value="">-- Fakülte Seç --</option>
+                        </select>
+                        <label>
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            Bölüm
+                        </label>
+                        <select id="dept-select" class="grad-dept-select">
+                            <option value="">-- Bölüm Seç --</option>
+                        </select>
+                        <label>
+                            <i class="fa-solid fa-flask-vial"></i>
+                            Lablı Seçmeli Şartı (opsiyonel)
+                        </label>
+                        <input id="elective-with-lab-input" type="number" min="0" class="grad-dept-select"
+                            placeholder="Örn: 4">
+                        <label>
+                            <i class="fa-solid fa-book"></i>
+                            Labsız Seçmeli Şartı (opsiyonel)
+                        </label>
+                        <input id="elective-without-lab-input" type="number" min="0" class="grad-dept-select"
+                            placeholder="Örn: 3">
+                        <div id="elective-rules-hint" style="font-size:0.8rem; color:var(--text-muted);">
+                            Kural boş bırakılırsa bölümde tanımlı varsayılanlar kullanılır.
+                        </div>
+                        <button id="check-graduation-btn" class="grad-check-btn">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i>
+                            Kontrol Et
+                        </button>
+                    </div>
+                    <div id="graduation-report">
+                        <div style="text-align:center; padding:50px 20px; color:var(--text-muted);">
+                            <i class="fa-solid fa-graduation-cap"
+                                style="font-size:3rem; margin-bottom:15px; display:block; opacity:0.3;"></i>
+                            <p style="font-size:1rem;">Bölümünü seç ve <strong>Kontrol Et</strong>'e tıkla.</p>
+                            <p style="font-size:0.85rem; margin-top:5px;">Zorunlu derslerini, teknik seçmelilerini ve
+                                mezuniyet şartlarını kontrol edelim.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: Useful Tools -->
+            <div id="view-useful-tools" class="app-view" style="display:none; padding: 20px;">
+                <div class="tools-view-card">
+                    <div class="tools-view-head">
+                        <h3><i class="fa-solid fa-file-pdf"></i> PDF Araçları</h3>
+                        <a href="pdf_tools/index.html" target="_blank" rel="noopener noreferrer" class="tools-open-new-tab">
+                            Yeni Sekmede Aç
+                        </a>
+                    </div>
+                    <p>Ana siteden ayrılmadan PDF araçlarını buradan kullanabilirsin.</p>
+                    <iframe id="pdf-tools-iframe" title="PDF Tools" data-src="pdf_tools/index.html"></iframe>
+                </div>
+            </div>
+
+            <footer class="app-footer-bar">
+                <a href="https://github.com/ekinciimuhammed/hacettepeganocalculator/tree/v21-son" target="_blank" class="github-link">
+                    <i class="fa-brands fa-github"></i> GitHub
+                </a>
+                <div class="contributors">
+                    <span>Made with</span>
+                    <span class="heart-icon-container">
+                        ❤️
+                        <div class="contributors-tooltip">
+                            <a href="https://www.linkedin.com/in/muhammedekinci/" target="_blank">Muhammed Ekinci</a>
+                            <a href="https://www.linkedin.com/in/yusufdemiray/" target="_blank">Yusuf Demiray</a>
+                            <a href="https://www.linkedin.com/in/murat-din%C3%A7/" target="_blank">Murat Dinç</a>
+                        </div>
+                    </span>
+                </div>
+            </footer>
+        </main>
+
+        <aside class="info-sidebar">
+            <div class="info-card" id="info-card">
+                <div class="info-header">
+                    <i class="fa-solid fa-circle-info"></i> Bilgilendirme
+                    <button class="info-close-btn" id="close-info-btn" title="Kapat"><i
+                            class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="info-body">
+                    <p>Bu proje <strong>Hacettepeli bir öğrenci</strong> tarafından, Hacettepeli öğrencilerin işlerini
+                        kolaylaştırmak için geliştirilmiştir.</p>
+                    <p>İlgili ders verileri <a href="https://bilsis.hacettepe.edu.tr/oibs/bologna/index.aspx#"
+                            target="_blank">Bologna Bilgi Sistemi</a> üzerinden çekilmiştir.</p>
+                    <hr style="border: none; border-top: 1px solid var(--border-color); margin: 15px 0; opacity: 0.5;">
+                    <p class="disclaimer">
+                        Eksik veya hatalı bir bilgi varsa lütfen bölümünüze danışınız.
+                        Uygulama da eklenebileceğini düşündüğünüz özellikleri lütfen Hacettepe Geri bildirim üzerinden
+                        bildiriniz.
+                        Derslerin açık olup kapanma durumu bölümden bölüme, hocaya ve döneme göre değiştiği için
+                        öğrencilerin en güncel bilgileri danışmanlarından almaları rica olunur.
+                        Ayrıca proje hakkında ki geri dönüșlerinizi <a
+                            href="https://geribildirim.hacettepe.edu.tr/basvuru-sayfasi" target="_blank">Hacettepe Geri
+                            Bildirim</a> üzerinden iletebilirsiniz.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Optional: Tech Stack/About if needed -->
+        </aside>
+    </div><!-- /.page-wrapper -->
+
+    <footer class="app-footer">
+        <p>Bu proje Hacettepeli bir öğrenci tarafından ,Hacettepeli öğrencilerin işlerini kolaylaştırmak için
+            geliştirilmiştir. Veriler <a href="https://bilsis.hacettepe.edu.tr/oibs/bologna/index.aspx#"
+                target="_blank">Bologna Bilgi Sistemi</a> üzerinden çekilmiştir. Önerilen Dersleri bölümler bazı
+            dönemlerde açabilir. En güncel bilgileri danışmanlarınızdan alınız.</p>
+        <p>Ayrıca proje hakkında ki geri dönüșlerinizi <a href="https://geribildirim.hacettepe.edu.tr/basvuru-sayfasi"
+                target="_blank">Hacettepe Geri Bildirim</a> üzerinden iletebilirsiniz.</p>
+    </footer>
+
+    <!-- Grade Scale Editor Modal -->
+    <div id="grade-scale-editor-modal" class="gs-modal-overlay hidden">
+        <div class="gs-modal">
+            <div class="gs-modal-header">
+                <h3><i class="fa-solid fa-sliders"></i> Not Ölçeği Düzenleyici</h3>
+                <button class="gs-modal-close" onclick="closeGradeScaleEditor()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="gs-modal-body">
+                <div class="gs-preset-bar">
+                    <label>Hazır Ölçek:</label>
+                    <select id="gs-preset-select" onchange="applyGradeScalePreset(this.value)">
+                        <option value="">-- Seç --</option>
+                        <option value="a1a2">A1/A2 Sistemi (Hacettepe Tarzı)</option>
+                        <option value="aabb">AA/BB Sistemi</option>
+                        <option value="plusminus">Plus/Minus Sistemi (Vakıf Üniversiteleri)</option>
+                    </select>
+                </div>
+                <div class="gs-entries-header">
+                    <span>Harf</span>
+                    <span>Katsayı (0–4)</span>
+                    <span></span>
+                </div>
+                <div id="gs-editor-entries" class="gs-entries-list">
+                    <!-- Rows injected by JS -->
+                </div>
+                <button class="gs-add-btn" onclick="addGradeEntry()">
+                    <i class="fa-solid fa-plus"></i> Yeni Satır Ekle
+                </button>
+            </div>
+            <div class="gs-modal-footer">
+                <button class="btn btn-outline-secondary" onclick="closeGradeScaleEditor()">İptal</button>
+                <button class="btn btn-primary-solid" onclick="saveGradeScaleEditor()">
+                    <i class="fa-solid fa-floppy-disk"></i> Kaydet & Uygula
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="static/js/custom_parser.js?v=8"></script>
+    <script src="static/js/curriculum_data.js?v=1"></script>
+    <script src="static/js/graduation.js?v=4"></script>
+    <script src="static/js/script.js?v=5"></script>
+</body>
+
+</html>
